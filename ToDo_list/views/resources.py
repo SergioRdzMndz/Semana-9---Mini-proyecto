@@ -1,0 +1,8 @@
+TITLE = ("Arial", 25)
+TEXT = ("Arial", 17)
+
+PRIMARY_COLOR = "#539CA4"
+SECONDARY_COLOR = "#e6ac5a"
+THIRD_COLOR = "#ffd56a"
+FOURTH_COLOR = "#297383"
+TEXT_COLOR = "#832900"
