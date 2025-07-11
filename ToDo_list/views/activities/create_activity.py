@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox as mb
 from db.operations import ToDo
-from tkcalendar import Calendar
+from tkcalendar import DateEntry
 from views.resources import PRIMARY_COLOR, SECONDARY_COLOR, THIRD_COLOR, FOURTH_COLOR, TITLE, TEXT, TEXT_COLOR
 
 
@@ -28,19 +28,20 @@ def show_create_activity(w: tk.Tk):
     entry_title.grid(column=1, row=1, columnspan=3,sticky="nw", ipadx=70, padx=10)
     entry_description = tk.Entry(w,font=TEXT)
     entry_description.grid(column=1, row=2, columnspan=3,sticky="nw", ipadx=70, padx=10)
-    entry_date = Calendar(w, width= 20, year = 2025, month = 7, day = 1, selectmode ='day')
+    entry_date = DateEntry(w, width= 20, year = 2025, month = 7, day = 1, selectmode ='day')
     entry_date.grid(column=1, row=3, columnspan=3,sticky="nw", ipadx=70, padx=10)
 
     def enviar():
         data={}
         data["title"] = entry_title.get()
         data["description"] = entry_description.get()
-        data["date"] = entry_date.selection_get()
+        data["date"] = entry_date.get_date()
         status, msg = ToDo(data)
         if not status:
             mb.showerror("Ocurrió un error: ", msg)
             return
         mb.showinfo("Actividad creada!", msg)
+        show_create_activity(w)
         
 
     tk.Button (w,font=TEXT, text= "GUARDAR", fg= TEXT_COLOR, bg=SECONDARY_COLOR ,relief="flat",command=enviar).grid(column=0,row=4,columnspan=3,sticky="n")
